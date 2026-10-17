@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thomas AI Math Studio</title>
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script><script src="app.js" defer></script></head>
+<body>
+<header><h1>∑ Thomas AI Math Studio</h1><p>Your Mathematics. Your Voice. Infinite Lessons.</p>
+<button id="theme" aria-label="Toggle theme">◐</button></header>
+<nav id="nav">
+<button data-p="dash">Dashboard</button><button data-p="create">Create</button><button data-p="script">Script</button>
+<button data-p="voice">My Voice</button><button data-p="intro">Intro</button><button data-p="video">Video</button><button data-p="set">Settings</button></nav>
+<main>
+<section id="dash"><h2>Dashboard</h2><div id="st" class="card">Checking services…</div>
+<button class="big" data-go="create">＋ Create Lesson</button>
+<div class="card"><b>Not built yet:</b> Upload Materials, Animation Studio (Manim), Templates library, Google Drive storage, 9:16 scene editing. See README.</div></section>
+
+<section id="create" hidden><h2>Create Lesson</h2>
+<label>Topic or problem<textarea id="topic" rows="4" placeholder="e.g. Solving quadratic equations by factorisation"></textarea></label>
+<label>Level<select id="level"><option>Grade 7-9</option><option selected>Grade 10-12</option><option>WASSCE preparation</option><option>Mathematics Olympiad</option><option>University / advanced</option></select></label>
+<label>Area<select id="area"><option>Algebra</option><option>Number theory</option><option>Euclidean geometry</option><option>Combinatorics</option><option>Inequalities</option><option>Proofs</option><option>Calculus</option></select></label>
+<label>Learning objective (optional)<input id="obj"></label>
+<label>Minutes (1-20)<input id="min" type="number" value="5" min="1" max="20"></label>
+<label>Difficulty<select id="diff"><option>easy</option><option selected>medium</option><option>hard</option></select></label>
+<label>Language<input id="lang" value="English"></label>
+<label>Style<select id="style"><option>step-by-step</option><option>conceptual</option><option>exam-technique</option></select></label>
+<details class="card"><summary>Or load a script from JSON (no AI credit used)</summary><textarea id="jin" rows="5" placeholder="Paste a lesson JSON, e.g. samples/sample_lesson.json"></textarea><button id="jload">Load JSON</button></details>
+<button class="big" id="gen">Generate script</button><p id="msg1" class="msg"></p></section>
+
+<section id="script" hidden><h2>Script Editor</h2><div id="scenes">No script yet.</div>
+<div class="row"><button id="addsc">Add scene</button><button id="check">Run SymPy checks</button></div><div id="checks"></div>
+<label class="chk"><input type="checkbox" id="proofok"> I manually reviewed the reasoning (required for proofs / Olympiad content)</label>
+<button class="big" id="approve">Approve script</button><p id="msg2" class="msg"></p></section>
+
+<section id="voice" hidden><h2>My AI Voice</h2><div id="vst" class="card"></div>
+<p>Record 1–5 clear samples of <b>your own voice</b> (quiet room, no music, 1–3 minutes each is typical; check your provider's current requirements). Only upload voices you are authorized to use.</p>
+<label>Voice name<input id="vname" value="B. Hallison F. Thomas"></label>
+<label>Recordings<input id="vfiles" type="file" accept="audio/*" multiple></label>
+<label class="chk"><input type="checkbox" id="consent"> These are my own recordings (or I am authorized to use them).</label>
+<button class="big" id="vgo">Create voice</button><p id="msg3" class="msg"></p></section>
+
+<section id="intro" hidden><h2>Introduction</h2>
+<label class="chk"><input type="checkbox" id="ien" checked> Include spoken introduction</label>
+<label>Name on screen<input id="iname" value="B. Hallison F. Thomas"></label>
+<label>Title on screen<input id="ititle" value="Mathematics Educator | Problem Solver | Mathematics Olympiad Trainer"></label>
+<label>Version<select id="ikind"><option value="full">Full</option><option value="short">Short</option></select></label>
+<label>Script<textarea id="iscript" rows="8"></textarea></label>
+<div class="row"><button id="iprev">▶ Preview audio</button><button id="isave">Save template</button></div>
+<select id="itpl"></select><audio id="iaud" controls hidden></audio><p id="msg4" class="msg"></p></section>
+
+<section id="video" hidden><h2>Video Generator</h2>
+<label>Format<select id="orient"><option value="landscape">16:9 landscape</option><option value="portrait">9:16 portrait</option></select></label>
+<label>Animation engine<select id="engine"><option value="simple">Simple (fast, low data)</option><option value="manim">Manim animation (slower; falls back to simple if unavailable)</option></select></label>
+<label>Speed<input id="speed" type="number" step="0.05" min="0.7" max="1.2" value="1"></label>
+<div id="est" class="card"></div>
+<button class="big" id="render">Generate video</button>
+<progress id="prog" value="0" max="1" hidden></progress><p id="msg5" class="msg"></p>
+<video id="player" controls playsinline hidden></video><a id="dl" class="big" hidden download="lesson.mp4">⬇ Download MP4</a></section>
+
+<section id="set" hidden><h2>Settings</h2>
+<label>Backend URL<input id="api" readonly></label>
+<label>Access token (kept for this browser session only)<input id="tok" type="password" autocomplete="off"></label>
+<button id="savetok">Save</button><p class="msg">API keys for AI and voice live ONLY on the backend.</p></section>
+</main></body></html>
